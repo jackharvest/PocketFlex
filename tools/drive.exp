@@ -1,0 +1,38 @@
+#!/usr/bin/expect -f
+# Drives lib/ui.sh inside a pty and replays a key script, so navigation can be
+# exercised end-to-end without an eject/insert cycle on the SD card.
+#
+#   tools/drive.exp <appdir> "wait:8 down ok wait:5 down ok wait:4"
+#
+# Keys: up down left right ok esc  |  wait:<seconds>
+
+log_user 1
+set appdir [lindex $argv 0]
+set keys   [lindex $argv 1]
+
+set env(PF_DIR) $appdir
+set env(PF_SYS) /tmp/pfsys
+set env(TERM)   xterm
+
+spawn /bin/sh $appdir/lib/ui.sh
+stty rows 29 columns 53 < $spawn_out(slave,name)
+
+proc drain {secs} { expect -timeout $secs "@@NOMATCH@@" }
+
+foreach k [split $keys " "] {
+	if {[string match "wait:*" $k]} {
+		drain [string range $k 5 end]
+		continue
+	}
+	switch -- $k {
+		up    { send "\033\[A" }
+		down  { send "\033\[B" }
+		left  { send "\033\[D" }
+		right { send "\033\[C" }
+		ok    { send " " }
+		esc   { send "\033" }
+	}
+	drain 1
+}
+drain 3
+catch {exec kill -9 [exp_pid]}

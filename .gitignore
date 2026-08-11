@@ -1,0 +1,7 @@
+# Runtime state. data/token is a live Plex credential and must never be committed.
+App/PocketFlex/data/
+# Downloaded video. Gigabytes of it, and none of it ours.
+App/PocketFlex/cache/
+.testsys/
+*.log
+.DS_Store

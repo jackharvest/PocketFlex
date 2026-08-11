@@ -1,0 +1,6 @@
+{
+	"label":	"PocketFlex",
+	"icon":	"/mnt/SDCARD/App/PocketFlex/res/icon.png",
+	"launch":	"launch.sh",
+	"description":	"Stream from Plex"
+}
