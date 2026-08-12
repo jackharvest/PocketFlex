@@ -25,7 +25,7 @@ export PATH LD_LIBRARY_PATH
 mkdir -p "$PF_DATA" "$PF_RUN" 2>/dev/null
 
 PF_PRODUCT="PocketFlex"
-PF_VERSION="0.4.2"
+PF_VERSION="0.4.3"
 # X-Plex-Platform MUST be a platform the server has a built-in client profile
 # for. Verified against Plex 1.43.2: "Linux" makes every
 # /video/:/transcode/universal/* request fail with a bare 400 Bad Request and
