@@ -241,6 +241,27 @@ at download time. Delete it and fetch it again.
   report `librarySectionTitle` on episodes, things land one level shallower,
   under the show rather than under the library.
 
+## Reporting a bug
+
+[Open an issue](../../issues/new) and include these three things. The first one
+usually answers it on its own:
+
+1. **`data/pocketflex.log`**, from the PocketFlex folder on your card. It's
+   plain text, it caps itself at 256 KB, and it records a lot more than the
+   screen ever shows — what the server actually sent, what the player did with
+   it, and why. Have a read through before you send it, in case you'd rather
+   not share a title or two.
+2. **Your OnionOS version.** This was built against 4.3.1.
+3. **Your Plex Media Server version.** This was built against 1.43.2. The
+   transcode endpoints are the least predictable thing here, and they change.
+
+The very first line of the log tells you which version of PocketFlex you're on,
+which saves a round trip.
+
+Worth checking before you write: if a film plays at half speed with no sound,
+find the `decoded audio:` line. If it says `5.1` rather than `stereo`, that's
+the known cause and it's genuinely useful to say so.
+
 ## For the curious
 
 [`docs/NOTES.md`](docs/NOTES.md) has the technical background: how the pieces
